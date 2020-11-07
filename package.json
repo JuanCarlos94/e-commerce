@@ -1,0 +1,21 @@
+{
+  "name": "e-commerce-in-node",
+  "version": "1.0.0",
+  "description": "Simple E-commerce implemented in node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "e-commerce",
+    "node.js"
+  ],
+  "author": "Juan Carlos Lima dos Santos",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "express": "^4.17.1",
+    "mocha": "^8.2.1",
+    "mongoose": "^5.10.11"
+  }
+}
