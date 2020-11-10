@@ -9,5 +9,9 @@ module.exports = {
         let user = await User(req.body);
         await user.save();
         res.json(user);
+    },
+    async find(req, res){
+        let user = await User.findById(req.params.id).populate('addresses');
+        res.json(user);
     }
 }
