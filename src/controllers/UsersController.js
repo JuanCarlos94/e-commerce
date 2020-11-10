@@ -6,8 +6,8 @@ module.exports = {
         res.json(user);
     },
     async create(req, res){
-        let newUser = await User(req.body);
-        let savedUser = await newUser.save();
-        res.json(savedUser);
+        let user = await User(req.body);
+        await user.save();
+        res.json(user);
     }
 }
