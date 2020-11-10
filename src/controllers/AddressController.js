@@ -4,12 +4,12 @@ const User = require('../models/User');
 
 module.exports = {
     async create(req, res){
-        Address.create(req.body).then(savedAddress => {
-            User.findByIdAndUpdate(
-                req.params.userId,
-                {$push: {addresses: savedAddress._id}}
-            )
-            res.json(savedAddress)
-        })
+        const user = await User.findById(req.params.userId);
+        const address = new Address(req.body);
+        address.owner = user;
+        await address.save();
+        user.addresses.push(address);
+        await user.save();
+        res.status(201).json(address);
     }
 }
