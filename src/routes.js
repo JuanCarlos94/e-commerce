@@ -10,9 +10,18 @@ const routes = Router();
  */
 routes.post('/login', AuthenticationController.login)
     .post('/logout', AuthenticationController.logout);
+
+/**
+ * Users
+ */
 routes.post('/users', UsersController.create)
-    .get('/users', UsersController.all)
-    .get('/users/:id', UsersController.find)
+    .get('/users', VerifyJWT, UsersController.all)
+    .get('/users/:id', UsersController.find);
+
+/**
+ * Addresses
+ */
+routes.post('/address/:userId', AddressController.create);
 
 /**
  * Products
@@ -21,4 +30,4 @@ routes.post('/products', ProductController.create)
     .get('/products/:id', ProductController.find)
     .get('/products', ProductController.list);
 
-module.exports = routes
+module.exports = routes;
