@@ -7,4 +7,6 @@ const ProductSchema = Schema({
     images: [{type: String}],
     unitValue: { type: Number, required: true},
     count: { type: Number, required: true},
-})
+});
+
+module.exports = mongoose.model('Product', ProductSchema);
