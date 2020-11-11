@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const VerifyJWT = require('./middlewares/VerifyJWT');
 const UsersController = require('./controllers/UsersController');
 const AddressController = require('./controllers/AddressController');
 const ProductController = require('./controllers/ProductController');
