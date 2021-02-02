@@ -1,4 +1,8 @@
 module.exports = {
+    Authentication: {
+        EMAIL_NOT_INFORMED: 'Email not informed',
+        PASSWORD_NOT_INFORMED: 'Password not informed'
+    },
     Authorization: {
         ACCESS_DENIED: 'Access denied',
         PERMISSION_DENIED: 'Permission denied',
