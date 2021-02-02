@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const Messages = require('../config/Messages');
-const ErrorHandler = require('../config/ErrorHandler');
 const User = require('../models/User');
 
 module.exports = function HasPermission(permissions) {
