@@ -1,14 +1,16 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const uri = ''
+const uri = process.env.URI_MONGODB;
 
 mongoose.connect(uri, {
+    useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
+});
+mongoose.set('useFindAndModify', false);
 
-const db = mongoose.connection
+const db = mongoose.connection;
 
-db.once('open', function(){
-    console.log('DB connection success!')
-})
+db.once('open', function(err){
+    if(err) console.log(err);
+});
