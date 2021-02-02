@@ -7,6 +7,8 @@ const ProductSchema = Schema({
     images: [{type: String}],
     unitValue: { type: Number, required: true},
     count: { type: Number, required: true},
+    category: {type: Schema.Types.ObjectId, ref: 'Category'},
+    evaluations: [{ type: Schema.Types.ObjectId, ref: 'ProductEvaluation'}]
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
