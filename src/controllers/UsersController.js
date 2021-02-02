@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const UserPermissions = require('../models/UserPermission');
 const service = require('../services/UserServices');
-const authenticationServices = require('../services/AuthenticationServices');
+const AutheticationServices = require('../services/AuthorizationServices');
 const { validationResult } = require('express-validator');
 const msg = require('../config/Messages');
 
@@ -22,7 +22,7 @@ module.exports = {
         const errors = validationResult(req);
         if (!errors.isEmpty())
             return res.status(400).json({ message: errors.array().map((e) => { return e.msg; }) });
-        const userId = await authenticationServices.getUserIdFromToken(req.headers['authorization']);
+        const userId = await AutheticationServices.getUserIdFromToken(req.headers['authorization']);
         if (userId != data._id)
             return res.status(500).json({ message: msg.USERS.USER_ID_INVALID });
         const userUpdated = await User.findOneAndUpdate(userId, { name: req.body.name, cellphone: req.body.cellphone });
@@ -31,7 +31,7 @@ module.exports = {
     async me(req, res, next) {
         try {
             const token = req.headers['authorization'];
-            const user = await authenticationServices.searchUserOwnerToken(token);
+            const user = await AutheticationServices.searchUserOwnerToken(token);
             return res.status(200).json(user);
         } catch (err) {
             return res.status(500).json({message: err});
