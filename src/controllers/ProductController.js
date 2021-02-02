@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 const Category = require('../models/Category');
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 module.exports = {
     async create(req, res) {
@@ -31,13 +31,5 @@ module.exports = {
             if(err) return res.status(404).json({message: err});
             return res.status(200).json(doc);
         })
-    },
-    fieldValidation() {
-        return [
-            body('name').notEmpty(),
-            body('category').notEmpty(),
-            body('unitValue').isNumeric(),
-            body('count').isNumeric()
-        ];
     }
 }
