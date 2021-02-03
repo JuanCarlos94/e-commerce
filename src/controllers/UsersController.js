@@ -25,16 +25,14 @@ module.exports = {
         const userId = await AutheticationServices.getUserIdFromToken(req.headers['authorization']);
         if (userId != data._id)
             return res.status(500).json({ message: msg.USERS.USER_ID_INVALID });
-        const userUpdated = await User.findOneAndUpdate(userId, { name: req.body.name, cellphone: req.body.cellphone });
+        const today = new Date();
+        const userUpdated = await User.findOneAndUpdate(userId, { name: req.body.name, cellphone: req.body.cellphone, updatedAt: today.toString()});
         return res.status(200).json(userUpdated);
     },
     async me(req, res, next) {
-        try {
-            const token = req.headers['authorization'];
-            const user = await AutheticationServices.searchUserOwnerToken(token);
-            return res.status(200).json(user);
-        } catch (err) {
-            return res.status(500).json({message: err});
-        }
+        const token = req.headers['authorization'];
+        const user = await AutheticationServices.searchUserOwnerToken(token);
+        if(!user) return res.status(404).json({message: msg.USERS.USER_NOT_FOUND});
+        return res.status(200).json(user);
     }
 }
