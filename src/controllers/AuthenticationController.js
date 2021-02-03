@@ -1,7 +1,5 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
-const Role = require('../models/UserPermission');
 const msg = require('../config/Messages');
 
 module.exports = {
