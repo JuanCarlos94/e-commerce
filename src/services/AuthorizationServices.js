@@ -4,12 +4,11 @@ const Messages = require('../config/Messages');
 
 module.exports = {
     searchUserOwnerToken: async function(token){
-        const user = await jwt.verify(this.removeBearerName(token), process.env.SECRET, async (err, decoded) => {
-            if (err)
-                throw Messages.Authorization.TOKEN_INVALID;
-            return await userServices.find(decoded.id);
+        return jwt.verify(this.removeBearerName(token), process.env.SECRET, async (err, decoded) => {
+            if (err) return null;
+            const user = await userServices.find(decoded.id);
+            return user;
         })
-        return user;
     },
     getUserIdFromToken: async function(token){
         const userId = await jwt.verify(this.removeBearerName(token), process.env.SECRET, async (err, decoded) => {
