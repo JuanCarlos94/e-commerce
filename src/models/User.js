@@ -14,7 +14,9 @@ const UserSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Address"
         }],
-        permission: {type: String, required: true, default: UserPermissions.USER}
+        permission: {type: String, required: true, default: UserPermissions.USER},
+        createdAt: {type: Date, required: true},
+        updatedAt: {type: Date, required: true}
     });
 
 UserSchema.methods.setPassword = function(password){
