@@ -16,6 +16,7 @@ const AddressController = require('./controllers/AddressController');
 const ProductController = require('./controllers/ProductController');
 const AuthenticationController = require('./controllers/AuthenticationController');
 const CategoryController = require('./controllers/CategoryController');
+const ProductEvaluationController = require('./controllers/ProductEvaluationController');
 
 /**
  * Validators
@@ -55,6 +56,13 @@ routes.post('/products', Authorization([UserPermissions.ADMIN, UserPermissions.S
     .get('/products/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductController.find)
     .get('/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductController.list)
     .put('/products/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.update(), ProductController.update);
+
+/**
+ * Products Evaluations
+ */
+routes.post('/products-evaluation', Authorization([UserPermissions.USER]), ProductEvaluationController.create)
+    .get('/products-evaluation/:id', ProductEvaluationController.find)
+    .get('/products-evaluation/:productID/:page/by-product', ProductEvaluationController.listByProduct);
 
 /**
  * Categories
