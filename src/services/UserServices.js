@@ -12,16 +12,18 @@ module.exports = {
         }
         let user = User(data);
         user.setPassword(data.password);
+        const today = new Date();
+        user.createdAt = today.toString();
+        user.updatedAt = today.toString();
         const userSaved = await user.save();
         return userSaved;
     },
     find: async function (id) {
-        let user = await User.findById(id, 'name email cellphone addresses permission').catch(function (err) {
-            if (err)
-                throw msg.USERS.USER_NOT_FOUND;
+        return User.findById(id, 'name email cellphone addresses permission', (err, user) => {
+            if (err) return null;
+            user.populate('addresses');
+            return user;
         });
-        user.populate('addresses');
-        return user;
     },
     async remove(id){
         return await User.remove({ _id: id});
