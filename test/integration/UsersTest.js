@@ -164,10 +164,13 @@ describe('User module', function () {
     })
 
     it('should find user sign in', (done) => {
+        const today = new Date();
         const user = new User({
             name: 'Teste2',
             email: 'teste2@gmail.com',
-            cellphone: '11111111111'
+            cellphone: '11111111111',
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         });
         user.setPassword('teste123');
         user.save((err, user) => {
@@ -191,10 +194,10 @@ describe('User module', function () {
         });
     })
 
-    // after((done) => {
-    //     User.deleteMany((err) => {
-    //         if (err) done(err);
-    //         done();
-    //     });
-    // });
+    after((done) => {
+        User.deleteMany((err) => {
+            if (err) done(err);
+            done();
+        });
+    });
 })
