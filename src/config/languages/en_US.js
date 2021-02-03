@@ -34,5 +34,13 @@ module.exports = {
         COUNT_NOT_INFORMED: 'Count not informed',
         CATEGORY_NOT_INFORMED: 'Category not informed',
         UNIT_VALUE_NOT_INFORMED: 'Unit value not informed'
+    },
+    PRODUCTS_EVALUATIONS: {
+        REGISTERED: 'Evaluation registered with success',
+        ERROR_WHEN_SAVING: 'Error, try again!',
+        PRODUCT_NOT_FOUND: 'Product not found.',
+        USER_NOT_FOUND: 'User not found',
+        EVALUATION_NOT_FOUND: 'Evaluation not found',
+        ERROR_WHEN_LIST_EVALUATIONS_BY_PRODUCT: 'Error when list evaluations by product'
     }
 }
