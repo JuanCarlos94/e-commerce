@@ -7,10 +7,13 @@ const msg = require('../../src/config/Messages');
 describe('Authentication module', function () {
     before(async () => {
         await User.deleteMany();
+        const today = new Date();
         const user = new User({
             name: 'test',
             email: 'test@mail.com',
-            cellphone: '99988223311'
+            cellphone: '99988223311',
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         });
         user.setPassword('test123');
         await user.save();
