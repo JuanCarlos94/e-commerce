@@ -9,36 +9,53 @@ describe('Users super admin module', () => {
     let adminToken = null;
     let basicUser = null;
 
-    before(async () => {
-        await User.deleteMany();
+    before((done) => {
+        const today = new Date();
         const adminUser = new User({
             name: 'Admin',
             email: 'admin2@mail.com',
             cellphone: '22222222222',
-            permission: UserPermissions.SUPER_ADMIN
+            permission: UserPermissions.SUPER_ADMIN,
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         });
         adminUser.setPassword('admin123');
-        adminUser.save((err, obj) => {
-            const id = obj._id;
-            this.adminToken = jwt.sign({ id }, process.env.SECRET, { expiresIn: 1000 });
+
+        const basicUser1 = new User({
+            name: 'Teste 4',
+            email: 'teste4@gmail.com',
+            cellphone: '22222222222',
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         });
-        const users = [
-            {
-                name: 'Teste 4',
-                email: 'teste4@gmail.com',
-                cellphone: '22222222222'
-            },
-            {
-                name: 'Teste 5',
-                email: 'teste5@gmail.com',
-                cellphone: '11111111111'
-            }
-        ];
-        for (i in users) {
-            let user = new User(users[i]);
-            user.setPassword('user123');
-            this.basicUser = await user.save();
-        }
+        basicUser1.setPassword('basic1');
+
+        const basicUser2 = new User({
+            name: 'Teste 5',
+            email: 'teste5@gmail.com',
+            cellphone: '11111111111',
+            createdAt: today.toString(),
+            updatedAt: today.toString()
+        });
+        basicUser2.setPassword('basic2');
+
+        User.deleteMany((err) => {
+            if(err) done(err);
+            adminUser.save((err, obj) => {
+                if(err) done(err);
+                const id = obj._id;
+                this.adminToken = jwt.sign({ id }, process.env.SECRET, { expiresIn: 1000 });
+                basicUser1.save((err) => {
+                    if(err) done(err);
+                    basicUser2.save((err, saved) => {
+                        if(err) done(err);
+                        this.basicUser = saved;
+                        done();
+                    });
+                });
+            });
+        });
+        
     });
 
     it('Should return a list of users', (done) => {
@@ -77,10 +94,13 @@ describe('Users super admin module', () => {
 
     it('Should delete a user registered', (done) => {
         const token = this.adminToken;
+        const today = new Date();
         const user = new User({
             name: 'Teste delete',
             email: 'testedelete@gmail.com',
-            cellphone: '11111111111'
+            cellphone: '11111111111',
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         })
         user.setPassword('teste231');
         user.save((err, obj) => {
@@ -101,10 +121,13 @@ describe('Users super admin module', () => {
 
     it('Should update user without erros', (done) => {
         const token = this.adminToken;
+        const today = new Date();
         const user = new User({
             name: 'teste update user',
             email: 'update@mail.com',
-            cellphone: '998281921'
+            cellphone: '998281921',
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         });
         user.setPassword('teste123');
 
