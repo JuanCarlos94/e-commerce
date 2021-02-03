@@ -18,12 +18,14 @@ describe('Product module test', function () {
                 console.log('Category delete', err);
         });
         Product.deleteMany();
-
+        const today = new Date();
         const user = new User({
             'name': 'admin',
             'email': 'admin@mail.com',
             'cellphone': '9999888888',
-            'permission': UserPermissions.ADMIN
+            'permission': UserPermissions.ADMIN,
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         });
         user.setPassword('admin123');
 
@@ -89,7 +91,6 @@ describe('Product module test', function () {
             });
     });
 
-
     it('Product not created: description not informed', (done) => {
         const payload = {
             name: 'TV'
@@ -151,11 +152,14 @@ describe('Product module test', function () {
     });
 
     it('Product not created: user has not permission', (done) => {
+        const today = new Date();
         const user = new User({
             name: 'user',
             email: 'user@mail.com',
             cellphone: '99988223311',
-            permission: UserPermissions.USER
+            permission: UserPermissions.USER,
+            createdAt: today.toString(),
+            updatedAt: today.toString()
         });
         const product = {
             name: 'TV',
@@ -296,7 +300,6 @@ describe('Product module test', function () {
             done(err);
         })
     })
-
 
     after((done) => {
         Category.deleteMany((err) => {
