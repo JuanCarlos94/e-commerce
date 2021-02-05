@@ -57,7 +57,7 @@ describe('Product module test', function () {
             "category": this.category
         };
         request(app)
-            .post('/products')
+            .post('/admin/products')
             .send(payload)
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + this.token)
@@ -77,7 +77,7 @@ describe('Product module test', function () {
     it('Product not created: name not informed', (done) => {
         const payload = {};
         request(app)
-            .post('/products')
+            .post('/admin/products')
             .send(payload)
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + this.token)
@@ -96,7 +96,7 @@ describe('Product module test', function () {
             name: 'TV'
         };
         request(app)
-            .post('/products')
+            .post('/admin/products')
             .send(payload)
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + this.token)
@@ -116,7 +116,7 @@ describe('Product module test', function () {
             description: 'TV 50'
         };
         request(app)
-            .post('/products')
+            .post('/admin/products')
             .send(payload)
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + this.token)
@@ -137,7 +137,7 @@ describe('Product module test', function () {
             count: 10
         };
         request(app)
-            .post('/products')
+            .post('/admin/products')
             .send(payload)
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + this.token)
@@ -172,7 +172,7 @@ describe('Product module test', function () {
             const id = userSaved._id;
             const tokenUser = jwt.sign({ id }, process.env.SECRET, { expiresIn: 1000});
             request(app)
-            .post('/products')
+            .post('/admin/products')
             .send(product)
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + tokenUser)
@@ -234,7 +234,7 @@ describe('Product module test', function () {
         }
         const token = this.token;
         request(app)
-        .get('/products')
+        .get('/admin/products')
         .set('Content-Type', 'application/json')
         .set('Authorization', 'Bearer ' + token)
         .expect(200)
@@ -262,7 +262,7 @@ describe('Product module test', function () {
         const token = this.token;
         product.save((err, obj) => {
             request(app)
-            .put('/products/' + obj._id)
+            .put('/admin/products/' + obj._id)
             .send(productChanges)
             .set('Content-Type', 'application/json')
             .set('Authorization', 'Bearer ' + token)
@@ -288,7 +288,7 @@ describe('Product module test', function () {
             unitValue: 500.0
         }
         request(app)
-        .put('/products/222')
+        .put('/admin/products/222')
         .send(productsChanges)
         .set('Content-Type', 'application/json')
         .set('Authorization', 'Bearer ' + this.token)
