@@ -176,7 +176,7 @@ describe('Product Evaluations module test', function () {
         .expect(200)
         .then(res => {
             assert.equal(res.body.length, 10);
-            assert.isAbove(res.headers['x-count'], 20);
+            assert.isAbove(parseInt(res.headers['x-total']), 20);
         })
         .catch(err => {
             console.error(err);
@@ -187,7 +187,7 @@ describe('Product Evaluations module test', function () {
         .expect(200)
         .then(res => {
             assert.equal(res.body.length, 10);
-            assert.isAbove(res.headers['x-count'], 20);
+            assert.isAbove(parseInt(res.headers['x-total']), 20);
         })
         .catch(err => {
             console.error(err);
