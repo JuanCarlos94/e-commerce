@@ -33,7 +33,7 @@ module.exports = {
         const page = parseInt(req.params.page);
         const skip = page <= 0 ? 0 : (page - 1) * 10;
         const evaluations = await ProductEvaluation.find({product: req.params.productID}, ['rating', 'message', 'date'], {skip, limit}).exec();
-        const count = await ProductEvaluation.count({product: req.params.productID}).exec();
-        return res.set('X-COUNT', count).status(200).json(evaluations);
+        const count = await ProductEvaluation.countDocuments({product: req.params.productID}).exec();
+        return res.set('X-TOTAL', count).status(200).json(evaluations);
     }
 }
