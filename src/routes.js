@@ -17,6 +17,7 @@ const ProductController = require('./controllers/ProductController');
 const AuthenticationController = require('./controllers/AuthenticationController');
 const CategoryController = require('./controllers/CategoryController');
 const ProductEvaluationController = require('./controllers/ProductEvaluationController');
+const SearchProductController = require('./controllers/SearchProductsController');
 
 /**
  * Validators
@@ -52,10 +53,9 @@ routes.post('/address/:userId', AddressController.create);
 /**
  * Products
  */
-routes.post('/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.create(), ProductController.create)
-    .get('/products/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductController.find)
-    .get('/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductController.list)
-    .put('/products/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.update(), ProductController.update);
+routes.get('/top-sold-products', SearchProductController.topSold)
+    .get('/products/:id', ProductController.find)
+    .get('/products', SearchProductController.search);
 
 /**
  * Products Evaluations
@@ -77,7 +77,10 @@ routes.post('/super-admin/users', Authorization([UserPermissions.SUPER_ADMIN]), 
     .get('/super-admin/users/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), SuperAdminController.find)
     .get('/super-admin/users', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), SuperAdminController.index)
     .put('/super-admin/users/:id', Authorization([UserPermissions.SUPER_ADMIN]), UserValidator.update(true), SuperAdminController.update)
-    .delete('/super-admin/users/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), SuperAdminController.remove);
+    .delete('/super-admin/users/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), SuperAdminController.remove)
+    .get('/admin/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductController.list)
+    .post('/admin/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.create(), ProductController.create)
+    .put('/admin/products/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.update(), ProductController.update);
 
 /**
  * User permissions
