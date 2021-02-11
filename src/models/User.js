@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const crypto = require('crypto');
-const UserPermissions = require('./UserPermission')
+const UserPermissions = require('./enums/UserPermission')
 
 const UserSchema = new Schema(
     {
