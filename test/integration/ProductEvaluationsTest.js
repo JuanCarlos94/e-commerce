@@ -7,7 +7,7 @@ const Product = require('../../src/models/Product');
 const ProductEvaluation = require('../../src/models/ProductEvaluation');
 const User = require('../../src/models/User');
 const jwt = require('jsonwebtoken');
-const UsersPermissions = require('../../src/models/UserPermission');
+const UsersPermissions = require('../../src/models/enums/UserPermission');
 
 describe('Product Evaluations module test', function () {
     let token = null;

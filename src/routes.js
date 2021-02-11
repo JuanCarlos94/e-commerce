@@ -30,7 +30,7 @@ const CategoryValidator = require('./validators/CategoryValidator');
 /**
  * Permissions
  */
-const UserPermissions = require('./models/UserPermission');
+const UserPermissions = require('./models/enums/UserPermission');
 
 /**
  * Authentication

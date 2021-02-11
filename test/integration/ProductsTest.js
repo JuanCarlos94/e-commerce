@@ -6,7 +6,7 @@ const Product = require('../../src/models/Product');
 const msg = require('../../src/config/Messages');
 const User = require('../../src/models/User');
 const jwt = require('jsonwebtoken');
-const UserPermissions = require('../../src/models/UserPermission');
+const UserPermissions = require('../../src/models/enums/UserPermission');
 
 describe('Product module test', function () {
     let token = null;

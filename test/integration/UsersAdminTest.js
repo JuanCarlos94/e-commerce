@@ -1,4 +1,4 @@
-const UserPermissions = require('../../src/models/UserPermission');
+const UserPermissions = require('../../src/models/enums/UserPermission');
 const jwt = require('jsonwebtoken');
 const app = require('../../app');
 const assert = require('chai').assert;
