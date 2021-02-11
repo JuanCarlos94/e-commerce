@@ -42,5 +42,40 @@ module.exports = {
         USER_NOT_FOUND: 'User not found',
         EVALUATION_NOT_FOUND: 'Evaluation not found',
         ERROR_WHEN_LIST_EVALUATIONS_BY_PRODUCT: 'Error when list evaluations by product'
+    },
+    PURCHASE: {
+        STATUS: {
+            REGISTERED: '',
+            AWAITING_PAYMENT: 'Awaiting payment',
+            DELIVERED: 'Delivered',
+            SENT: 'Sent',
+            CANCELED: 'Canceled'
+        },
+        CREATED: 'Purchase created',
+        ERROR_WHEN_REGISTERING_PURCHASE: 'Error when registering purchase, try again'
+    },
+    PAYMENT: {
+        STATUS: {
+            AWAITING_PAYMENT: 'Awaiting payment',
+            PAID: 'Paid',
+            CANCELED: 'Canceled',
+            EXPIRED: 'Expired'
+        },
+        METHODS: {
+            CREDIT_CARD: 'Credit card',
+            BILLET: 'Billet'
+        }
+    },
+    COUPON: {
+        ERROR_WHEN_CREATED: 'Error when try create coupon, try again.'
+    },
+    DISCOUNT: {
+        ERROR_WHEN_CREATING: 'Error when try create discount, try again.',
+        DELETED: 'Deleted with success.',
+        NAME_NOT_INFORMED: 'Name not informed',
+        PRODUCTS_NOT_INFORMED: 'Products not informeds',
+        VALUE_NOT_INFORMED: 'Value not informed',
+        EXPIRES_AT_NOT_INFORMED: 'Expires at not informed',
+        PERCENTAGE_NOT_INFORMED: 'Percentage not informed'
     }
 }
