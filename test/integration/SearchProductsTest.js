@@ -123,7 +123,6 @@ describe('Search products tests', () => {
         .set('Content-Type', 'application/json')
         .expect(200)
         .then(res => {
-            console.log('top products', res.body);
             assert.isAbove(res.body.length, 0);
             done();
         })
