@@ -3,23 +3,27 @@ const Schema = mongoose.Schema;
 
 const PurchaseSchema = Schema({
     createdAt: {type: Date, required: true},
-    amount: {type: Number, required: true, default: 0},
-    status: {type: Enumerator, required: true},
-    stageHistory: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Stage'
+    total: {type: Number, required: true, default: 0},
+    status: {type: String, required: true},
+    user: {type: Schema.Types.ObjectId, required: true},
+    historic: [{
+        description: {type: String, required: true},
+        date: { type: Date, required: true},
     }],
     orders: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Order'
+        product: {
+            id: {type: Schema.Types.ObjectId, ref: 'Product'},
+            name: {type: String},
+            unitValue: {type: Number}
+        },
+        count: {type: Number, required: true},
+        total: {type: Number, required: true},
+        discount: {type: Number}
     }],
     payment: {
-        type: Schema.Types.ObjectId,
-        ref: 'Payment'
-    },
-    discount: {
-        type: Schema.Types.ObjectId,
-        ref: 'Discount'
+        status: {type: String, required: true},
+        method: { type: String, required: true},
+        installments: { type: Number, required: true},
     }
 });
 
