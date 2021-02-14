@@ -67,7 +67,16 @@ module.exports = {
         }
     },
     COUPON: {
-        ERROR_WHEN_CREATED: 'Error when try create coupon, try again.'
+        ERROR_WHEN_CREATED: 'Error when try create coupon, try again.',
+        NOT_FOUND: 'Coupon not found.',
+        ERROR_WHEN_DELETING: 'Error when deleting, try again.',
+        DELETED: 'Coupon deleted with success.',
+        NAME_NOT_INFORMED: 'Name not informed',
+        CODE_NOT_INFORMED: 'Code not informed',
+        PRODUCTS_NOT_INFORMED: 'Products not informed',
+        VALUE_NOT_INFORMED: 'Value not informed',
+        EXPIREAT_NOT_INFORMED: 'Expires at not informed',
+        PERCENTAGE_NOT_INFORMED: 'Percentage not informed'
     },
     DISCOUNT: {
         ERROR_WHEN_CREATING: 'Error when try create discount, try again.',
