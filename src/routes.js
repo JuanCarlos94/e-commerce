@@ -19,6 +19,7 @@ const CategoryController = require('./controllers/CategoryController');
 const ProductEvaluationController = require('./controllers/ProductEvaluationController');
 const SearchProductController = require('./controllers/SearchProductsController');
 const DiscountController = require('./controllers/DiscountController');
+const CouponController = require('./controllers/CouponController');
 
 /**
  * Validators
@@ -27,6 +28,7 @@ const UserValidator = require('./validators/UserValidator');
 const ProductValidator = require('./validators/ProductValidator');
 const AuthenticationValidator = require('./validators/AuthenticationValidator');
 const CategoryValidator = require('./validators/CategoryValidator');
+const CouponValidator = require('./validators/CouponValidator');
 const DiscountValidator = require('./validators/DiscountValidator');
 
 /**
@@ -80,14 +82,27 @@ routes.post('/super-admin/users', Authorization([UserPermissions.SUPER_ADMIN]), 
     .get('/super-admin/users', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), SuperAdminController.index)
     .put('/super-admin/users/:id', Authorization([UserPermissions.SUPER_ADMIN]), UserValidator.update(true), SuperAdminController.update)
     .delete('/super-admin/users/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), SuperAdminController.remove)
-    .get('/admin/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductController.list)
-    .post('/admin/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.create(), ProductController.create)
-    .put('/admin/products/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.update(), ProductController.update);
+    ;
 
+routes.get('/admin/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductController.list)
+    .post('/admin/products', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.create(), ProductController.create)
+    .put('/admin/products/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), ProductValidator.update(), ProductController.update)
+
+/**
+ * Discount routes
+ */
 routes.post('/discounts', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), DiscountValidator.create(), DiscountController.create)
     .get('/discounts/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), DiscountController.find)
     .get('/discounts', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), DiscountController.list)
     .delete('/discounts/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), DiscountController.delete);
+
+/**
+ * Coupons routes
+ */
+routes.post('/coupons', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), CouponValidator.create(), CouponController.create)
+    .get('/coupons/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), CouponController.find)
+    .get('/coupons', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), CouponController.list)
+    .delete('/coupons/:id', Authorization([UserPermissions.ADMIN, UserPermissions.SUPER_ADMIN]), CouponController.delete);
 
 /**
  * User permissions
