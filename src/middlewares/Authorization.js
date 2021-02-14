@@ -33,7 +33,7 @@ function removeBearerName(token) {
 
 async function loadUserPermission(userId) {
     const user = await User.findById(userId, {_id: false, permission: true}, (err) => {
-        if(err) console.error(err);
+        if(err) null;
     });
     return user.permission;
 }
