@@ -5,10 +5,11 @@ const User = require('../models/User');
 module.exports = function HasPermission(permissions) {
     return async function (req, res, next) {
         try {
-            if (typeof permissions === 'string')
-                permissions = [permisions];
+            if (typeof permissions === 'string'){
+                permissions = [permissions];
+            }
             const token = req.headers['authorization'];
-            jwt.verify(removeBearerName(token), process.env.SECRET, async (err, decoded) => {
+            return await jwt.verify(removeBearerName(token), process.env.SECRET, async (err, decoded) => {
                 if (err)
                     return res.status(401).json({message: Messages.Authorization.TOKEN_INVALID});
                 const userPermission = await loadUserPermission(decoded.id);
@@ -31,6 +32,8 @@ function removeBearerName(token) {
 }
 
 async function loadUserPermission(userId) {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId, {_id: false, permission: true}, (err) => {
+        if(err) console.error(err);
+    });
     return user.permission;
 }
