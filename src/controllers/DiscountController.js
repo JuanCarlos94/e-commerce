@@ -5,12 +5,13 @@ const { validationResult } = require('express-validator');
 module.exports = {
     async create(req, res) {
         const errors = validationResult(req);
-        if (!errors.isEmpty())
+        if (!errors.isEmpty()) {
             return res.status(500).json({ message: errors.array()[0].msg });
+        }
         const discount = new Discount(req.body);
-        await discount.save((err, obj) => {
-            if (err) res.status(500).json({ message: MSG.DISCOUNT.ERROR_WHEN_CREATING });
-            return res.status(201).json(obj);
+        await discount.save((err, saved) => {
+            if (err) return res.status(500).json({ message: MSG.DISCOUNT.ERROR_WHEN_CREATING });
+            return res.status(201).json(saved);
         });
     },
     async list(req, res){
